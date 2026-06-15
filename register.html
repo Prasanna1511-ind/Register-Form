@@ -1,72 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-<head style="display: flex; flex-direction: column;">
+<head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            height: 100vh;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1d2671, #c33764);
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            font-family: Arial, sans-serif;
+            justify-content: center;
             gap: 20px;
-            background: linear-gradient(135deg,#1d2671,#c33764);
+            font-family: Arial, sans-serif;
         }
 
-        .Header{
+        .Header {
             font-weight: bold;
-            font-size: 300%;
-        }
-
-        .register-box select {
-            width: 100%;
-            padding: 8px;
-            margin: 8px 0;
+            font-size: 2rem;
+            color: white;
+            text-align: center;
         }
 
         .register-box {
-            background: rgb(140, 71, 205);
+            background: white;
             padding: 30px;
-            width: 350px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 400px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         }
 
         .register-box h2 {
             text-align: center;
+            margin-bottom: 20px;
         }
 
-        .register-box input {
+        .register-box label {
+            font-weight: bold;
+        }
+
+        .register-box input,
+        .register-box select {
             width: 100%;
-            padding: 8px;
-            margin: 8px 0;
-            gap: 5px;
+            padding: 10px;
+            margin: 8px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-container button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .gpay {
+            background: #34a853;
         }
 
         .reg {
-            width: 100%;
-            padding: 10px;
             background: #2196F3;
-            color: white;
-            border-radius: 30px;
-            cursor: pointer;
         }
 
-        .register-box p {
-            text-align: center;
+        .btn-container button:hover {
+            opacity: 0.9;
         }
-
-        
     </style>
 </head>
+
 <body>
-    <div class="Header"> WELCOME TO BEST ENGINEERING COLLEGE</div>
+
+    <div class="Header">
+        WELCOME TO BEST ENGINEERING COLLEGE
+    </div>
 
     <div class="register-box">
         <h2>Register</h2>
+
         <form>
             <label>NAME</label>
             <input type="text" placeholder="Full Name" required>
@@ -75,21 +103,22 @@
             <input type="email" placeholder="Email" required>
 
             <label>Phone Number</label>
-            <input type="text" placeholder="Phone Number" required>
+            <input type="tel" placeholder="Phone Number" required>
 
             <label>College Name</label>
             <input type="text" placeholder="College Name" required>
 
-            <div>
-                <label>Select Event</label>
-                <select required>
-                    <option value="">Choose th Event</option>
-                    <option>technical Event</option>
-                    <option>Non-Technical Event</option>
-                </select>
+            <label>Select Event</label>
+            <select required>
+                <option value="">Choose the Event</option>
+                <option>Technical Event</option>
+                <option>Non-Technical Event</option>
+            </select>
+
+            <div class="btn-container">
+                <button type="button" class="gpay">G-Pay</button>
+                <button type="submit" class="reg">Register</button>
             </div>
-            <button type="submit" style="gap: 10px;">G-Pay</button>
-            <button type="submit" class="reg">Register</button>
         </form>
     </div>
 
