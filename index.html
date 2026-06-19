@@ -95,21 +95,21 @@
     <div class="register-box">
         <h2>Register</h2>
 
-        <form>
+        <form id="registerForm">
             <label>NAME</label>
-            <input type="text" placeholder="Full Name" required>
+            <input type="text" name="name" placeholder="Full Name" required>
 
             <label>E-Mail ID</label>
-            <input type="email" placeholder="Email" required>
+            <input type="email" name="email" placeholder="Email" required>
 
             <label>Phone Number</label>
-            <input type="tel" placeholder="Phone Number" required>
+            <input type="tel" name="phone" placeholder="Phone Number" required>
 
             <label>College Name</label>
-            <input type="text" placeholder="College Name" required>
+            <input type="text" name="college" placeholder="College Name" required>
 
             <label>Select Event</label>
-            <select required>
+            <select name="event" required>
                 <option value="">Choose the Event</option>
                 <option>Technical Event</option>
                 <option>Non-Technical Event</option>
@@ -122,5 +122,37 @@
         </form>
     </div>
 
+    <script>
+
+    const form = document.getElementById("registerForm");
+
+    form.addEventListener("submit", async (e) => {
+
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            phone: formData.get("phone"),
+            college: formData.get("college"),
+            event: formData.get("event")
+        };
+
+        const response = await fetch("/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.text();
+
+        alert(result);
+    });
+
+    </script>
 </body>
 </html>
