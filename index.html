@@ -111,8 +111,8 @@
             <label>Select Event</label>
             <select name="event" required>
                 <option value="">Choose the Event</option>
-                <option>Technical Event</option>
-                <option>Non-Technical Event</option>
+                <option value="Technical Event">Technical Event</option>
+                <option value="Non-Technical Event">Non-Technical Event</option>
             </select>
 
             <div class="btn-container">
@@ -123,36 +123,40 @@
     </div>
 
     <script>
+        const form = document.getElementById("registerForm");
 
-    const form = document.getElementById("registerForm");
+        form.addEventListener("submit", async (e) => {
 
-    form.addEventListener("submit", async (e) => {
+            e.preventDefault();
 
-        e.preventDefault();
+            const formData = new FormData(form);
 
-        const formData = new FormData(form);
+            const data = {
+                name: formData.get("name"),
+                email: formData.get("email"),
+                phone: formData.get("phone"),
+                college: formData.get("college"),
+                event: formData.get("event")
+            };
 
-        const data = {
-            name: formData.get("name"),
-            email: formData.get("email"),
-            phone: formData.get("phone"),
-            college: formData.get("college"),
-            event: formData.get("event")
-        };
+            try {
+                const response = await fetch("/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                });
 
-        const response = await fetch("/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-            body: JSON.stringify(data)
+                const result = await response.text();
+                alert(result);
+
+            } catch (err) {
+                console.log(err);
+                alert("Something went wrong");
+            }
         });
-
-        const result = await response.text();
-
-        alert(result);
-    });
-
     </script>
+
 </body>
 </html>
