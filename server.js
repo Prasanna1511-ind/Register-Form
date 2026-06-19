@@ -7,7 +7,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve index.html when opening localhost:3000
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
@@ -21,7 +20,7 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
     if (err) {
-        console.log(err);
+        console.log("Connection Error:", err);
     } else {
         console.log("MySQL Connected");
     }
@@ -29,22 +28,24 @@ db.connect((err) => {
 
 app.post("/register", (req, res) => {
 
-    console.log(req.body);
+    console.log("Received Data:", req.body);
 
     const { name, email, phone, college, event } = req.body;
 
     const sql =
-        "INSERT INTO registrations(name,email,phone,college,event) VALUES(?,?,?,?,?)";
+        "INSERT INTO registrations(name,email,phone,college,`event`) VALUES(?,?,?,?,?)";
 
     db.query(
         sql,
         [name, email, phone, college, event],
         (err, result) => {
+
             if (err) {
-                console.log(err);
+                console.log("MySQL Error:", err);
                 return res.send("Error");
             }
 
+            console.log("Inserted Successfully");
             res.send("Registration Success");
         }
     );
